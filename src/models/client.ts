@@ -29,6 +29,10 @@ const ClientSchema = new Schema({
     type: String,
     required: true,
   },
+  phone: {
+    type: String,
+    required: true,
+  },
   gender: {
     type: String,
     enum: ['MALE', 'FEMALE'],
