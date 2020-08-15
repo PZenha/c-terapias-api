@@ -1,6 +1,8 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server-express';
 
 const client = gql`
+  
+  
   enum Gender {
     MALE
     FEMALE
@@ -19,6 +21,7 @@ const client = gql`
   }
 
   type Client {
+    _id: ID
     name: String
     age: Int
     email: String
@@ -26,10 +29,11 @@ const client = gql`
     gender: Gender
     address: Address
     advisedBy: String
-    observations_id: ID
+    created_at: Date!
   }
 
   input ClientInput {
+    _id: ID
     name: String!
     age: Int!
     email: String!
@@ -40,12 +44,21 @@ const client = gql`
   }
 
   type Query {
-    addClient(name: String): String
-    listAllClients: [Client]
+    _empty: String
   }
 
   type Mutation {
+    _empty: String
+  }
+
+  extend type Query {
+    searchClients(name: String, phone: String): [Client]
+    listAllClients: [Client]
+  }
+
+  extend type Mutation {
     addNewClient(client: ClientInput): Client
+    editClient(client: ClientInput): Client
   }
 `;
 

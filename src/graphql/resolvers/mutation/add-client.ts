@@ -1,20 +1,9 @@
 import { IResolvers } from 'graphql-tools';
 import Client, { IClient } from '../../../models/client';
+import Observation from '../../../models/observation'
 
 interface IClientInput {
-  client: {
-    name: string;
-    age: number;
-    email: string;
-    phone: string;
-    gender: 'MALE' | 'FEMALE';
-    address: {
-      city: string;
-      zipcode: string;
-      street: string;
-    };
-    advisedBy: String;
-  };
+  client: IClient
 }
 
 const clientAddNewClient: IResolvers = {
@@ -30,6 +19,12 @@ const clientAddNewClient: IResolvers = {
         advisedBy: args.client.advisedBy,
       });
       await newClient.save();
+
+      await Observation.create({
+        user_id: newClient._id,
+        observations: []
+      })
+
       return newClient;
     },
   },
