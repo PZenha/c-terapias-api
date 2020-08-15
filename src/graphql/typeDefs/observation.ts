@@ -1,13 +1,30 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server-express';
 
 const observation = gql`
-  type Observation {
+ scalar Date
+
+  input AddObservationInput{
+    user_id: ID
+    obs: String
+  }
+
+  type obs{
     description: String
-    date: Date
+    created_at: Date
   }
 
   type Observation {
-    observations: [Observation!]
+    _id: ID
+    user_id: ID
+    observations: [obs]
+  }
+
+  extend type Mutation{
+    addObeservation(observation: AddObservationInput): Observation
+  }
+
+  extend type Query{
+    listClientObservation(user_id: ID): Observation
   }
 `;
 

@@ -1,5 +1,4 @@
-import mongoose, { Schema, Document, Types } from 'mongoose';
-import { ObjectID } from 'mongodb';
+import mongoose, { Schema, Document} from 'mongoose';
 
 export interface IClient extends Document {
   name: string;
@@ -12,8 +11,8 @@ export interface IClient extends Document {
     zipcode: string;
     street: string;
   };
+  created_at: Date
   advisedBy: string;
-  // observations_id: ObjectID;
 }
 
 const ClientSchema = new Schema({
@@ -26,6 +25,10 @@ const ClientSchema = new Schema({
     required: true,
   },
   email: {
+    type: String,
+    required: true,
+  },
+  phone: {
     type: String,
     required: true,
   },
@@ -47,12 +50,13 @@ const ClientSchema = new Schema({
       required: false,
     },
   },
+  created_at: {
+    type: Date,
+    default: Date.now
+  },
   advisedBy: {
     type: String,
-  },
-  //   observations_id: {
-  //     type: Types.ObjectId,
-  //   },
+  }
 });
 
 export default mongoose.model<IClient>('Client', ClientSchema);
