@@ -15,7 +15,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers: resolvers as any,
   playground: true,
-  context: ({ req, res }) => ({ req, res })
+  context: ({ req, res }) => ({ req, res }),
 });
 
 app.use(bodyParser.json());
@@ -34,6 +34,6 @@ connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     console.log('Failed to connect to MongoDB...');
   });
 
-app.listen(3000, () => {
-  console.log(`Listening on Port http://localhost:3000${server.graphqlPath}`);
+app.listen(5000, () => {
+  console.log(`Listening on Port http://localhost:5000${server.graphqlPath}`);
 });

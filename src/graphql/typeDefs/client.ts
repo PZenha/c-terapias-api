@@ -1,8 +1,6 @@
 import { gql } from 'apollo-server-express';
 
 const client = gql`
-  
-  
   enum Gender {
     MALE
     FEMALE
@@ -23,7 +21,7 @@ const client = gql`
   type Client {
     _id: ID
     name: String
-    age: Int
+    dob: Date
     email: String
     phone: String
     gender: Gender
@@ -35,7 +33,7 @@ const client = gql`
   input ClientInput {
     _id: ID
     name: String!
-    age: Int!
+    dob: Date
     email: String!
     phone: String!
     gender: Gender!

@@ -1,8 +1,8 @@
-import mongoose, { Schema, Document} from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IClient extends Document {
   name: string;
-  age: number;
+  dob: Date;
   email: string;
   phone: string;
   gender: 'MALE' | 'FEMALE';
@@ -11,7 +11,7 @@ export interface IClient extends Document {
     zipcode: string;
     street: string;
   };
-  created_at: Date
+  created_at: Date;
   advisedBy: string;
 }
 
@@ -20,8 +20,8 @@ const ClientSchema = new Schema({
     type: String,
     required: true,
   },
-  age: {
-    type: Number,
+  dob: {
+    type: Date,
     required: true,
   },
   email: {
@@ -52,11 +52,11 @@ const ClientSchema = new Schema({
   },
   created_at: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   advisedBy: {
     type: String,
-  }
+  },
 });
 
 export default mongoose.model<IClient>('Client', ClientSchema);

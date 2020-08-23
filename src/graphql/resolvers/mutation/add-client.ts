@@ -1,9 +1,9 @@
 import { IResolvers } from 'graphql-tools';
 import Client, { IClient } from '../../../models/client';
-import Observation from '../../../models/observation'
+import Observation from '../../../models/observation';
 
 interface IClientInput {
-  client: IClient
+  client: IClient;
 }
 
 const clientAddNewClient: IResolvers = {
@@ -11,7 +11,7 @@ const clientAddNewClient: IResolvers = {
     addNewClient: async (_, args: IClientInput) => {
       const newClient = new Client({
         name: args.client.name,
-        age: args.client.age,
+        dob: args.client.dob,
         email: args.client.email,
         phone: args.client.phone,
         gender: args.client.gender,
@@ -22,8 +22,8 @@ const clientAddNewClient: IResolvers = {
 
       await Observation.create({
         user_id: newClient._id,
-        observations: []
-      })
+        observations: [],
+      });
 
       return newClient;
     },
