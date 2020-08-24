@@ -9,6 +9,7 @@ interface IClientInput {
 const clientAddNewClient: IResolvers = {
   Mutation: {
     addNewClient: async (_, args: IClientInput) => {
+      console.log(`args: ${JSON.stringify(args, null, 2)}`);
       const newClient = new Client({
         name: args.client.name,
         dob: args.client.dob,
@@ -24,6 +25,19 @@ const clientAddNewClient: IResolvers = {
         user_id: newClient._id,
         observations: [],
       });
+
+      await Observation.updateOne(
+        {
+          user_id: newClient._id,
+        },
+        {
+          $push: {
+            observations: {
+              description: args.client.observation,
+            },
+          },
+        }
+      );
 
       return newClient;
     },

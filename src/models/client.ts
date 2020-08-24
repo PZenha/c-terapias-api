@@ -13,6 +13,7 @@ export interface IClient extends Document {
   };
   created_at: Date;
   advisedBy: string;
+  observation: string;
 }
 
 const ClientSchema = new Schema({

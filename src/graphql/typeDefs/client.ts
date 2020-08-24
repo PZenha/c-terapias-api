@@ -39,6 +39,7 @@ const client = gql`
     gender: Gender!
     address: AddressInput!
     advisedBy: String
+    observation: String
   }
 
   type Query {
