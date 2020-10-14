@@ -11,7 +11,7 @@ const editClient: IResolvers = {
         editClient: async (_, args: IEditClient) => {
             await Client.findOneAndUpdate({ _id: args.client._id }, {
                 name: args.client.name,
-                age: args.client.age,
+                age: args.client.dob,
                 email: args.client.email,
                 phone: args.client.phone,
                 gender: args.client.gender,

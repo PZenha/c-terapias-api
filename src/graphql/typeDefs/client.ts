@@ -27,16 +27,16 @@ const client = gql`
     gender: Gender
     address: Address
     advisedBy: String
-    created_at: Date!
+    created_at: Date
   }
 
   input ClientInput {
     _id: ID
-    name: String!
+    name: String
     dob: Date
-    email: String!
-    phone: String!
-    gender: Gender!
+    email: String
+    phone: String
+    gender: Gender
     address: AddressInput!
     advisedBy: String
     observation: String
@@ -58,6 +58,7 @@ const client = gql`
   extend type Mutation {
     addNewClient(client: ClientInput): Client
     editClient(client: ClientInput): Client
+    deleteClient(_id: ID): Boolean
   }
 `;
 
