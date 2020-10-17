@@ -42,6 +42,10 @@ const client = gql`
     observation: String
   }
 
+  type IDelete {
+    deleteClient: Boolean
+  }
+
   type Query {
     _empty: String
   }
@@ -58,7 +62,7 @@ const client = gql`
   extend type Mutation {
     addNewClient(client: ClientInput): Client
     editClient(client: ClientInput): Client
-    deleteClient(_id: ID): Boolean
+    deleteClient(_id: ID): IDelete
   }
 `;
 
