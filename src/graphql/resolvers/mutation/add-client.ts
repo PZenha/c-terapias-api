@@ -9,7 +9,13 @@ interface IClientInput {
 const clientAddNewClient: IResolvers = {
   Mutation: {
     addNewClient: async (_, args: IClientInput) => {
-      console.log(`args: ${JSON.stringify(args, null, 2)}`);
+
+      const observation = await Observation.create({
+        observations: [{
+          description: args.client.observation
+        }],
+      });
+
       const newClient = new Client({
         name: args.client.name,
         dob: args.client.dob,
@@ -18,26 +24,10 @@ const clientAddNewClient: IResolvers = {
         gender: args.client.gender,
         address: args.client.address,
         advisedBy: args.client.advisedBy,
+        observations_id: observation._id
       });
+
       await newClient.save();
-
-      await Observation.create({
-        user_id: newClient._id,
-        observations: [],
-      });
-
-      await Observation.updateOne(
-        {
-          user_id: newClient._id,
-        },
-        {
-          $push: {
-            observations: {
-              description: args.client.observation,
-            },
-          },
-        }
-      );
 
       return newClient;
     },
