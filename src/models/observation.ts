@@ -2,7 +2,6 @@ import mongoose, { Schema, Document } from 'mongoose';
 import { ObjectID } from 'mongodb';
 
 export interface IObservation extends Document {
-  user_id: ObjectID;
   observations: {
     description: string;
     created_at?: Date;
@@ -10,11 +9,6 @@ export interface IObservation extends Document {
 }
 
 const ObservationSchema = new Schema({
-  user_id: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'Client',
-  },
   observations: [
     {
       description: {
