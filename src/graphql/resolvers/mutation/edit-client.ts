@@ -17,7 +17,6 @@ const editClient: IResolvers = {
                 gender: args.client.gender,
                 address: args.client.address,
                 advisedBy: args.client.advisedBy
-
             })
             return args.client
         }
