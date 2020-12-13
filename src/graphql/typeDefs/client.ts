@@ -28,6 +28,31 @@ const client = gql`
     address: Address
     advisedBy: String
     created_at: Date
+    observations_id: ID
+  }
+
+  type SingleObservation {
+    description: String
+    created_at: Date
+  }
+
+  type ClientObservations {
+    _id: ID
+    observations: [SingleObservation]
+  }
+
+  type FullClientData {
+    _id: ID
+    name: String
+    dob: Date
+    email: String
+    phone: String
+    gender: Gender
+    address: Address
+    advisedBy: String
+    created_at: Date
+    observations_id: ID
+    observations: ClientObservations
   }
 
   input ClientInput {
@@ -55,7 +80,7 @@ const client = gql`
   }
 
   extend type Query {
-    searchClients(name: String, phone: String): [Client]
+    searchClients(name: String, phone: String): [FullClientData]
     listAllClients: [Client]
   }
 
