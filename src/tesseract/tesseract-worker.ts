@@ -6,9 +6,9 @@ const worker = createWorker({
  
 (async () => {
   await worker.load();
-  await worker.loadLanguage('eng');
-  await worker.initialize('eng');
-  const { data: { text } } = await worker.recognize('https://tesseract.projectnaptha.com/img/eng_bw.png');
+  await worker.loadLanguage('por');
+  await worker.initialize('por');
+  const { data: { text } } = await worker.recognize(__dirname + '/pic.png');
   console.log(text);
   await worker.terminate();
 })();
