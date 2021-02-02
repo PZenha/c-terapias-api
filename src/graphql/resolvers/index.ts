@@ -1,18 +1,18 @@
-import clientAddNewClient from './mutation/add-client';
-import editClient from './mutation/edit-client'
+import AddNewClient from './mutation/add-client';
+import updateClient from './mutation/update-client'
 import ListAllClients from './query/list-all-clients';
 import SearchClients from './query/search-clients'
-import addClientObservation from './mutation/add-observation'
-import listObservations from './query/list-observations'
+import addObservation from './mutation/add-observation'
+import findObservations from './query/find-observations'
 import deleteClient from './mutation/delete-client'
 
 const resolvers = [
     ListAllClients,
-    clientAddNewClient,
-    editClient,
+    AddNewClient,
+    updateClient,
     SearchClients,
-    addClientObservation,
-    listObservations,
+    addObservation,
+    findObservations,
     deleteClient
 ];
 

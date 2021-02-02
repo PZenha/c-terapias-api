@@ -4,27 +4,23 @@ const observation = gql`
  scalar Date
 
   input AddObservationInput{
-    user_id: ID
-    obs: String
-  }
-
-  type obs{
+    client_id: ID
     description: String
-    created_at: Date
   }
 
   type Observation {
     _id: ID
-    user_id: ID
-    observations: [obs]
+    client_id: ID
+    description: String
+    created_at: Date
   }
 
   extend type Mutation{
-    addObeservation(observation: AddObservationInput): Observation
+    addObservation(observation: AddObservationInput): Boolean
   }
 
   extend type Query{
-    listClientObservation(user_id: ID): Observation
+    findObservations(client_id: ID): [Observation]
   }
 `;
 

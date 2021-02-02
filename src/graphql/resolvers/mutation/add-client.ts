@@ -3,35 +3,37 @@ import Client, { IClient } from '../../../models/client';
 import Observation from '../../../models/observation';
 
 interface IClientInput {
-  client: IClient;
+  client: IClient & { observation: string}
 }
 
-const clientAddNewClient: IResolvers = {
+const AddNewClient: IResolvers = {
   Mutation: {
     addNewClient: async (_, args: IClientInput) => {
+      const { client } = args
+      try{
+        
+        const newClient = await Client.create({
+          name: client.name,
+          dob: client.dob,
+          email: client.email,
+          phone: client.phone,
+          gender: client.gender,
+          address: client.address,
+          advisedBy: client.advisedBy,
+        })
 
-      const observation = await Observation.create({
-        observations: [{
-          description: args.client.observation
-        }],
-      });
+        await Observation.create({
+          client_id: newClient._id,
+          description: client.observation
+        })
 
-      const newClient = new Client({
-        name: args.client.name,
-        dob: args.client.dob,
-        email: args.client.email,
-        phone: args.client.phone,
-        gender: args.client.gender,
-        address: args.client.address,
-        advisedBy: args.client.advisedBy,
-        observations_id: observation._id
-      });
-
-      await newClient.save();
-
-      return newClient;
+        return true;
+      }catch(err){
+        throw new Error(err)
+      }
+      
     },
   },
 };
 
-export default clientAddNewClient;
+export default AddNewClient;

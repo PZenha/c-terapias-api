@@ -2,12 +2,12 @@ import { IResolvers } from 'graphql-tools';
 import Client from '../../../models/client';
 
 
-const ListAllClients: IResolvers = {
+const FindAllClients: IResolvers = {
   Query: {
-    listAllClients: async () => {
+    FindAllClients: async () => {
       return await Client.find({});
     },
   },
 };
 
-export default ListAllClients;
+export default FindAllClients;

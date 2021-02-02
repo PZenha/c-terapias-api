@@ -3,13 +3,10 @@ import { IResolvers } from 'graphql-tools';
 import { ObjectID } from 'mongodb'
 import Client, { IClient } from '../../../models/client'
 
-interface IDelete {
-    _id: ObjectID
-}
 
 const deleteClient: IResolvers = {
     Mutation: {
-        deleteClient: async (_, args: IDelete ) =>{
+        deleteClient: async (_, args: { _id: ObjectID} ) =>{
             try{
                 await Client.findByIdAndDelete(args._id)
                 return true

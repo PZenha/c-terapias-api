@@ -28,17 +28,12 @@ const client = gql`
     address: Address
     advisedBy: String
     created_at: Date
-    observations_id: ID
-  }
-
-  type SingleObservation {
-    description: String
-    created_at: Date
   }
 
   type ClientObservations {
     _id: ID
-    observations: [SingleObservation]
+    description: String
+    created_at: Date
   }
 
   type FullClientData {
@@ -51,8 +46,7 @@ const client = gql`
     address: Address
     advisedBy: String
     created_at: Date
-    observations_id: ID
-    observations: ClientObservations
+    observations: [ClientObservations]
   }
 
   input ClientInput {
@@ -62,7 +56,7 @@ const client = gql`
     email: String
     phone: String
     gender: Gender
-    address: AddressInput!
+    address: AddressInput
     advisedBy: String
     observation: String
   }
@@ -80,14 +74,14 @@ const client = gql`
   }
 
   extend type Query {
-    searchClients(name: String, phone: String): [FullClientData]
-    listAllClients: [Client]
+    searchClients(name: String): [FullClientData]
+    FindAllClients: [Client]
   }
 
   extend type Mutation {
-    addNewClient(client: ClientInput): Client
-    editClient(client: ClientInput): Client
-    deleteClient(_id: ID): IDelete
+    addNewClient(client: ClientInput): Boolean
+    updateClient(client: ClientInput): Boolean
+    deleteClient(_id: ID): Boolean
   }
 `;
 

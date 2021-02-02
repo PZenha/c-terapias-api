@@ -2,22 +2,23 @@ import { IResolvers } from 'graphql-tools';
 import { ObjectID } from 'mongodb'
 import Observation from '../../../models/observation';
 
-interface IAddObs {
+interface IAddObservationInput {
     observation: {
-        user_id: ObjectID
-        obs: string
+        description: string
+        client_id: ObjectID
     }
 }
 
-const addClientObeservation: IResolvers = {
+const addClientObservation: IResolvers = {
     Mutation: {
-        addObeservation: async (_, args: IAddObs) => {
+        addObservation: async (_, args: IAddObservationInput) => {
+            const { observation: { description, client_id}} = args
             try {
-                return await Observation.findOneAndUpdate({ user_id: args.observation.user_id }, {
-                    $push: { observations: { description: args.observation.obs } }
-                },
-                    { new: true }
-                )
+                await Observation.create({
+                    client_id,
+                    description
+                })
+                return true
             } catch (err) {
                 throw new Error(`Failed to add observation! ${err}`);
             }
@@ -25,4 +26,4 @@ const addClientObeservation: IResolvers = {
     }
 }
 
-export default addClientObeservation
+export default addClientObservation

@@ -12,10 +12,8 @@ export interface IClient extends Document {
     zipcode: string;
     street: string;
   };
-  created_at: Date;
+  created_at?: Date;
   advisedBy: string;
-  observation: string;
-  observations_id: ObjectID
 }
 
 const ClientSchema = new Schema({
@@ -56,14 +54,11 @@ const ClientSchema = new Schema({
   created_at: {
     type: Date,
     default: Date.now,
+    required: false
   },
   advisedBy: {
     type: String,
   },
-  observations_id: {
-    type: Schema.Types.ObjectId,
-    ref: 'Observation'
-  }
 });
 
 export default mongoose.model<IClient>('Client', ClientSchema);

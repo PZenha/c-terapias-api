@@ -1,24 +1,29 @@
 import { IResolvers } from 'graphql-tools';
 import Client from '../../../models/client';
+import Observation from '../../../models/observation'
 
-interface ISearch {
-    name?: string
-}
 
 const SearchClients: IResolvers = {
     Query: {
-        searchClients: async (_, args: ISearch) => {
-            const client = await Client.aggregate()
-            .match({name: args.name})
+        searchClients: async (_, args: {name: string}) => {
+            const clients = await Client.aggregate()
+            .match({ $or: [
+                    {
+                        'name': {$regex: `${args.name}`,$options:'i'}
+                    },
+                    {
+                        'phone': {$regex: `${args.name}`,$options:'i'}
+                    }
+                ]})
             .lookup({
-                from: 'observations',
-                localField: 'observations_id',
-                foreignField: '_id',
+                from: Observation.collection.name,
+                localField: '_id',
+                foreignField: 'client_id',
                 as: 'observations'
             })
-            .unwind('observations')
             .exec()
-            return client
+
+            return clients
         }
     }
 }
