@@ -1,5 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
-import { ObjectID } from 'mongodb';
+import mongoose, { Schema, Document } from 'mongoose'
+import { ObjectID } from 'mongodb'
 
 export interface IObservation extends Document {
 
@@ -9,20 +9,20 @@ export interface IObservation extends Document {
 }
 
 const ObservationSchema = new Schema({
-      description: {
-        type: String,
-        required: false
-      },
-      created_at: {
-        type: Date,
-        required: false,
-        default: Date.now,
-      },
-      client_id: {
-        type: ObjectID,
-        ref: 'Client',
-        required: true
-      }
-    })
+  description: {
+    type: String,
+    required: false,
+  },
+  created_at: {
+    type: Date,
+    required: false,
+    default: Date.now,
+  },
+  client_id: {
+    type: ObjectID,
+    ref: 'Client',
+    required: true,
+  },
+})
 
-export default mongoose.model<IObservation>('Observation', ObservationSchema);
+export default mongoose.model<IObservation>('Observation', ObservationSchema)

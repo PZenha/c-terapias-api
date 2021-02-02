@@ -1,39 +1,39 @@
-import { ApolloServer } from 'apollo-server-express';
-import express from 'express';
-import typeDefs from './graphql/typeDefs';
-import resolvers from './graphql/resolvers';
-import helmet from 'helmet';
-import morgan from 'morgan';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import { MONGODB_URI } from './config';
-import { connect } from 'mongoose';
+import { ApolloServer } from 'apollo-server-express'
+import express from 'express'
+import helmet from 'helmet'
+import morgan from 'morgan'
+import cors from 'cors'
+import bodyParser from 'body-parser'
+import { connect } from 'mongoose'
+import { MONGODB_URI } from './config'
+import resolvers from './graphql/resolvers'
+import typeDefs from './graphql/typeDefs'
 
-const app = express();
+const app = express()
 
 const server = new ApolloServer({
   typeDefs,
   resolvers: resolvers as any,
   playground: true,
   context: ({ req, res }) => ({ req, res }),
-});
+})
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(helmet());
-app.use(morgan('tiny'));
-app.use(cors());
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(helmet());
+app.use(morgan('tiny'))
+app.use(cors())
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app })
 
 connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log('Connected to MongoDB...');
+    console.log('Connected to MongoDB...')
   })
   .catch(() => {
-    console.log('Failed to connect to MongoDB...');
-  });
+    console.log('Failed to connect to MongoDB...')
+  })
 
 app.listen(5000, () => {
-  console.log(`Listening on Port http://localhost:5000${server.graphqlPath}`);
-});
+  console.log(`Listening on Port http://localhost:5000${server.graphqlPath}`)
+})

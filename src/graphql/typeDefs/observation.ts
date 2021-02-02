@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+import { gql } from 'apollo-server-express'
 
 const observation = gql`
  scalar Date
@@ -22,6 +22,6 @@ const observation = gql`
   extend type Query{
     findObservations(client_id: ID): [Observation]
   }
-`;
+`
 
-export default observation;
+export default observation

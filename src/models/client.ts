@@ -1,5 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
-import { ObjectID } from 'mongodb'
+import mongoose, { Schema, Document } from 'mongoose'
 
 export interface IClient extends Document {
   name: string;
@@ -54,11 +53,11 @@ const ClientSchema = new Schema({
   created_at: {
     type: Date,
     default: Date.now,
-    required: false
+    required: false,
   },
   advisedBy: {
     type: String,
   },
-});
+})
 
-export default mongoose.model<IClient>('Client', ClientSchema);
+export default mongoose.model<IClient>('Client', ClientSchema)

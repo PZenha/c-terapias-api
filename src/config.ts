@@ -1,5 +1,7 @@
-require('dotenv').config();
+require('dotenv').config()
 
-const { env } = process;
+const { env } = process
 
-export const MONGODB_URI = env.MONGODB_URI || '127.0.0.1:27017';
+export const MONGODB_URI = env.MONGODB_URI || '127.0.0.1:27017'
+
+export default ''

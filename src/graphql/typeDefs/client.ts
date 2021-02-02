@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+import { gql } from 'apollo-server-express'
 
 const client = gql`
   enum Gender {
@@ -83,6 +83,6 @@ const client = gql`
     updateClient(client: ClientInput): Boolean
     deleteClient(_id: ID): Boolean
   }
-`;
+`
 
-export default client;
+export default client

@@ -1,6 +1,6 @@
-import { IResolvers } from 'graphql-tools';
-import Client, { IClient } from '../../../models/client';
-import Observation from '../../../models/observation';
+import { IResolvers } from 'graphql-tools'
+import Client, { IClient } from '../../../models/client'
+import Observation from '../../../models/observation'
 
 interface IClientInput {
   client: IClient & { observation: string}
@@ -10,8 +10,7 @@ const AddNewClient: IResolvers = {
   Mutation: {
     addNewClient: async (_, args: IClientInput) => {
       const { client } = args
-      try{
-        
+      try {
         const newClient = await Client.create({
           name: client.name,
           dob: client.dob,
@@ -24,16 +23,15 @@ const AddNewClient: IResolvers = {
 
         await Observation.create({
           client_id: newClient._id,
-          description: client.observation
+          description: client.observation,
         })
 
-        return true;
-      }catch(err){
+        return true
+      } catch (err) {
         throw new Error(err)
       }
-      
     },
   },
-};
+}
 
-export default AddNewClient;
+export default AddNewClient
