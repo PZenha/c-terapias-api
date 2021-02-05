@@ -76,6 +76,7 @@ const client = gql`
   extend type Query {
     searchClients(name: String): [FullClientData]
     FindAllClients: [Client]
+    findClient(_id: ID): FullClientData
   }
 
   extend type Mutation {
