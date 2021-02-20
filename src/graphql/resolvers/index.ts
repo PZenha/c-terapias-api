@@ -7,6 +7,7 @@ import AddNewClient from './mutation/add-client'
 import updateClient from './mutation/update-client'
 import deleteClient from './mutation/delete-client'
 import addObservation from './mutation/add-observation'
+import sendToken from './mutation/send-token'
 
 const resolvers = [
   ListAllClients,
@@ -17,6 +18,7 @@ const resolvers = [
   findObservations,
   deleteClient,
   findClient,
+  sendToken,
 ]
 
 export default resolvers

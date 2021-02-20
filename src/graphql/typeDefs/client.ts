@@ -83,6 +83,7 @@ const client = gql`
     addNewClient(client: ClientInput): Boolean
     updateClient(client: ClientInput): Boolean
     deleteClient(_id: ID): Boolean
+    sendToken(username: String): String
   }
 `
 
