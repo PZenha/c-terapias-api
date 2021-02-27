@@ -2,6 +2,8 @@ import { IResolvers } from 'graphql-tools'
 import User, { IUser } from '../../../../models/user'
 import totp from '../../../../utils/totp'
 import { TOTP_SECRET } from '../../../../config'
+import sendMail from '../../../../utils/mailer'
+import recoveryCodeTemplate from '../../../../templates/recovery-code'
 
 interface ISendCodeArgs {
     username: string
@@ -17,7 +19,11 @@ const sendCode: IResolvers = {
       }
 
       const code = totp.generate(TOTP_SECRET)
-      return code
+
+      const subject = 'Código de recuperação de password'
+      const template = recoveryCodeTemplate(code, subject)
+      sendMail(user.email, template, subject)
+      return true
     },
   },
 }

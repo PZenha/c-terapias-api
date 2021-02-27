@@ -24,7 +24,7 @@ const auth = gql`
     }
 
     extend type Mutation{
-        sendCode(username: String): String
+        sendCode(username: String): Boolean
         verifyCode(input: verifyCodeInput): String
         updateSecret(input: updateSecretInput): Boolean
         signIn(input: signInInput): signInResponse
