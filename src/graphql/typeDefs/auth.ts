@@ -18,7 +18,7 @@ const auth = gql`
         password: String
     }
 
-    type signInResponse {
+    type authTokens {
         accessToken: String
         refreshToken: String
     }
@@ -27,7 +27,8 @@ const auth = gql`
         sendCode(username: String): Boolean
         verifyCode(input: verifyCodeInput): String
         updateSecret(input: updateSecretInput): Boolean
-        signIn(input: signInInput): signInResponse
+        signIn(input: signInInput): authTokens
+        refreshTokens(refreshToken: String): authTokens 
     }
 `
 
