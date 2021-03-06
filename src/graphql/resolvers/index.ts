@@ -25,6 +25,7 @@ import sendCode from './mutation/auth/send-code'
 import verifyCode from './mutation/auth/verify-code'
 import signIn from './mutation/auth/sign-in'
 import updateSecret from './mutation/auth/update-secret'
+import refreshTokens from './mutation/auth/refresh-tokens'
 
 // Appointments
 import createAppointment from './mutation/appointment/create'
@@ -45,6 +46,7 @@ const resolvers = [
   verifyCode,
   signIn,
   updateSecret,
+  refreshTokens,
   createAppointment,
   deleteAppointment,
   updateAppointment,
