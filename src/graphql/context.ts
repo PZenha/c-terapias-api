@@ -9,34 +9,27 @@ export interface IContext extends ExpressContext {
 }
 
 const context = async (context: ExpressContext) => {
+  const authorization = context.req.headers.authorization ? context.req.headers.authorization : ''
 
-    //console.log(context)
+  const userToken = authorization.match(/^Bearer .*/) && authorization.split(' ')[1] || null
 
-    const authorization = context.req.headers.authorization ? context.req.headers.authorization : ''
+  const user = (userToken && (await getUser(userToken))) || null
 
-    const userToken = authorization.match(/^Bearer .*/) && authorization.split(' ')[1] || null
-
-    const user = (userToken && (await getUser(userToken))) || null
-
-    if(!user) throw new AuthenticationError('Not authorized!')
-
-    return { user, userToken }
-
+  return { user, userToken }
 }
 
 const getUser = async (token: string): Promise<IUser | null> => {
-    try{
-        const payload = await decodeToken(token)
-        const user = await User.findById(payload.uid)
+  try {
+    const payload = await decodeToken(token)
+    const user = await User.findById(payload.uid)
 
-        if(!user){
-            return null
-        }
-        return user
-
-    }catch(err){
-        return null
+    if (!user) {
+      return null
     }
+    return user
+  } catch (err) {
+    return null
+  }
 }
 
 export default context

@@ -10,6 +10,16 @@ const permissions = shield({
     findAppointmentByClient: isAuthenticated,
     findAppointmentByTimeInterval: isAuthenticated,
   },
+  Mutation: {
+    addNewClient: isAuthenticated,
+    addObservation: isAuthenticated,
+    deleteClient: isAuthenticated,
+    updateClient: isAuthenticated,
+    createAppointment: isAuthenticated,
+    deleteAppointment: isAuthenticated,
+    setAppointmentShowedUp: isAuthenticated,
+    updateAppointment: isAuthenticated,
+  },
 })
 
 export default permissions
