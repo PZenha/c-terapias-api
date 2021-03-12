@@ -29,6 +29,9 @@
         "no-underscore-dangle":"off",
         "no-unused-vars": "off",
         "no-console": "off",
-        "import/prefer-default-export": "off"
+        "import/prefer-default-export": "off",
+        "no-shadow": "off",
+        "no-use-before-define": "off",
+        "no-mixed-operators": "off"
     }
 }

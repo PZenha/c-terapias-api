@@ -6,16 +6,16 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import { connect } from 'mongoose'
 import { MONGODB_URI } from './config'
-import resolvers from './graphql/resolvers'
-import typeDefs from './graphql/typeDefs'
+import schema from './graphql/typeDefs'
+import context from './graphql/context'
 
 const app = express()
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers: resolvers as any,
+  schema,
+  // resolvers: resolvers as any,
   playground: true,
-  context: ({ req, res }) => ({ req, res }),
+  context,
 })
 
 app.use(bodyParser.json())
