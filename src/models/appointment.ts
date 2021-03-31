@@ -1,5 +1,7 @@
 import { ObjectID } from 'mongodb'
-import mongoose, { Schema, Document, ObjectId } from 'mongoose'
+import mongoose, {
+  Schema, Document, ObjectId, Types,
+} from 'mongoose'
 
 export interface IAppointment extends Document {
     client_id: ObjectId
@@ -10,7 +12,7 @@ export interface IAppointment extends Document {
 
 const AppointmentSchema = new Schema({
   client_id: {
-    type: ObjectID,
+    type: Schema.Types.ObjectId,
     ref: 'Client',
     required: true,
   },

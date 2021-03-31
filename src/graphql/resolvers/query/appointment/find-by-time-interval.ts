@@ -1,6 +1,8 @@
 import { IResolvers } from 'graphql-tools'
 import { ObjectId } from 'mongoose'
+import { ObjectID } from 'mongodb'
 import Appointment from '../../../../models/appointment'
+import Client, { IClient } from '../../../../models/client'
 
 interface IFindAppointmentByTimeIntervalInput {
     starts_at: Date
@@ -18,6 +20,13 @@ const findAppointmentByTimeInterval: IResolvers = {
         },
       })
       return appointments
+    },
+  },
+  Appointment: {
+    clientName: async (root) => {
+      const client: IClient = await Client.findById(root.client_id, { name: 1 })
+      const name = client.name.split(' ')
+      return `${name[0]} ${name.length > 1 && name[name.length - 1]}`
     },
   },
 }

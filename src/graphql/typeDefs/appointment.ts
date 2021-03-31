@@ -8,6 +8,7 @@ const appointment = gql`
         scheduled_to: Date
         created_at: Date
         showed_up: Boolean
+        clientName: String
     }
 
     extend type Query {
