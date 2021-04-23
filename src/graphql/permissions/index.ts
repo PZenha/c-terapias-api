@@ -20,6 +20,9 @@ const permissions = shield({
     setAppointmentShowedUp: isAuthenticated,
     updateAppointment: isAuthenticated,
   },
+},
+{
+  allowExternalErrors: true,
 })
 
 export default permissions
