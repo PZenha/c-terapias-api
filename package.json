@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
+    "start": "npm run build && node build/index",
     "dev": "ts-node-dev --respawn src/index.ts",
     "tesseract": "ts-node-dev src/tesseract/tesseract-worker.ts"
   },
@@ -14,7 +15,6 @@
   "license": "ISC",
   "devDependencies": {
     "@types/jsonwebtoken": "^8.5.0",
-    "@types/mongoose": "^5.7.36",
     "@types/nodemailer": "^6.4.0",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
@@ -46,5 +46,8 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.5.0",
     "otplib": "^12.0.1"
+  },
+  "engines": {
+    "node": "12.18.3"
   }
 }
