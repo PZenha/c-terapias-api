@@ -55,7 +55,6 @@ const client = gql`
     dob: Date
     email: String
     phone: String
-    gender: Gender
     address: AddressInput
     advisedBy: String
     observation: String
