@@ -5,16 +5,17 @@ import morgan from 'morgan'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import { connect } from 'mongoose'
-import { MONGODB_URI } from './config'
+import { MONGODB_URI, NODE_ENV } from './config'
 import schema from './graphql/typeDefs'
 import context from './graphql/context'
 
 const app = express()
+const port = process.env.PORT || 5000
 
 const server = new ApolloServer({
   schema,
   // resolvers: resolvers as any,
-  playground: true,
+  playground: NODE_ENV === 'development',
   context,
 })
 
@@ -34,6 +35,6 @@ connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindA
     console.log('Failed to connect to MongoDB...')
   })
 
-app.listen(5000, () => {
-  console.log(`Listening on Port http://localhost:5000${server.graphqlPath}`)
+app.listen(port, () => {
+  console.log(`Listening on Port http://localhost:${port}`)
 })

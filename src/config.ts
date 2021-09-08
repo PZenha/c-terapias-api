@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const { env } = process
 
+export const NODE_ENV = env.NODE_ENV || 'development'
 // DATABASE
 export const MONGODB_URI = env.MONGODB_URI || '127.0.0.1:27017'
 
