@@ -6,7 +6,7 @@
     "tsc": "./node_modules/typescript/bin/tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "npm run build && node build/index",
+    "start": "npm run tsc && npm run build && node build/index",
     "dev": "ts-node-dev --respawn src/index.ts",
     "postinstall": "npm run build",
     "tesseract": "ts-node-dev src/tesseract/tesseract-worker.ts"
