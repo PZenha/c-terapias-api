@@ -35,6 +35,10 @@ connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindA
     console.log('Failed to connect to MongoDB...')
   })
 
+app.get('/', (req, res) => {
+  res.send('ok')
+})
+
 app.listen(port, () => {
   console.log(`Listening on Port http://localhost:${port}`)
 })
