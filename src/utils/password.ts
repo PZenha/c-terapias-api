@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt-nodejs'
 
 export const hashPassword = (password: string) => {
   const salt = bcrypt.genSaltSync()
