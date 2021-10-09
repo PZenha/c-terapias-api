@@ -32,6 +32,12 @@
         "import/prefer-default-export": "off",
         "no-shadow": "off",
         "no-use-before-define": "off",
-        "no-mixed-operators": "off"
+        "no-mixed-operators": "off",
+        "padded-blocks": "off",
+        "max-len": "off",
+        "indent": "off",
+        "spaced-comment" :"off",
+        "class-methods-use-this":"off",
+        "no-trailing-spaces": "off"
     }
 }
