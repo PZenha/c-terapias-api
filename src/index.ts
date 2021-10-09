@@ -27,13 +27,7 @@ app.use(cors())
 
 server.applyMiddleware({ app })
 
-connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-  .then(() => {
-    console.log('Connected to MongoDB...')
-  })
-  .catch(() => {
-    console.log('Failed to connect to MongoDB...')
-  })
+export const database = connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 
 app.get('/', (req, res) => {
   res.send('ok')
