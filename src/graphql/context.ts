@@ -2,6 +2,7 @@ import { ExpressContext } from 'apollo-server-express/dist/ApolloServer'
 import { AuthenticationError } from 'apollo-server-express'
 import User, { IUser } from '../models/user'
 import { decodeToken } from '../utils/jwt'
+import { ENV_DEVELOPMENT } from '../config'
 
 export interface IContext extends ExpressContext {
     user: IUser
@@ -12,6 +13,10 @@ const context = async (context: ExpressContext) => {
   const authorization = context.req.headers.authorization ? context.req.headers.authorization : ''
 
   const userToken = authorization.match(/^Bearer .*/) && authorization.split(' ')[1] || null
+
+  if (ENV_DEVELOPMENT && userToken) {
+    return { user: 'dev', userToken }
+  }
 
   const user = (userToken && (await getUser(userToken))) || null
 

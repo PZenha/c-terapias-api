@@ -6,7 +6,7 @@ const { env } = process
 
 export const NODE_ENV = env.NODE_ENV || 'development'
 export const ENV_DEVELOPMENT = NODE_ENV === 'development'
-export const ENV_PRODOCTION = NODE_ENV === 'production'
+export const ENV_PRODUCTION = NODE_ENV === 'production'
 
 // DATABASE
 export const MONGODB_DATABASE = env.MONGODB_DATABASE || 'c-terapias'

@@ -2,6 +2,7 @@ import { IResolvers } from 'graphql-tools'
 import { comparePassword } from '../../../../utils/password'
 import User, { IUser } from '../../../../models/user'
 import { generateTokens } from '../../../../utils/jwt'
+import { ENV_DEVELOPMENT } from '../../../../config'
 
 export interface IsignInArgs {
   input: {
@@ -14,6 +15,12 @@ const signIn: IResolvers = {
   Mutation: {
     signIn: async (_, args: IsignInArgs) => {
       const { username, password } = args.input
+
+      if (ENV_DEVELOPMENT && username === 'dev' && password === 'dev') {
+        const { accessToken, refreshToken } = generateTokens(username)
+        return { accessToken, refreshToken }
+      }
+
       const user: IUser = await User.findOne({ username })
 
       if (!user) {
